@@ -16,6 +16,7 @@ public class Usuario {
     String sexo;
     int peso;
     int edad;
+    
 
     public void setIdUsuaurio(int IdUsuaurio) {
         this.IdUsuaurio = IdUsuaurio;
