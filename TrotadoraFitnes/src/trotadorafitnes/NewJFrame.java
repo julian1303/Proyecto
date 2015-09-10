@@ -5,6 +5,7 @@
  */
 package trotadorafitnes;
 
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 
@@ -14,11 +15,25 @@ public class NewJFrame extends javax.swing.JFrame {
     String modo;
     modoDeEntrenamiento m;
     int v=0;
-    
+    public double gr;
+    public double km;
     public NewJFrame() {
+        gr = 0;
+        km = 0;
         initComponents();        
     }
 
+    public void pintarResultado2()
+    {
+        DecimalFormat df = new DecimalFormat("0.0");
+        jTextField1.setText(df.format(km) + " Km/h");
+    }
+    
+    public void pintarResultado()
+    {
+        DecimalFormat df = new DecimalFormat("0.0");
+        jTextField1.setText(df.format(gr) + " °");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,49 +96,158 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton4.setText("2");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("3");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("4");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("7");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("8");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("9");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("12");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("11");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("10");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("5");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setText("6");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("+");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setText("-");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
-        jButton17.setText("1");
+        jButton17.setText("0");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
-        jButton18.setText("2");
+        jButton18.setText("1");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
-        jButton19.setText("3");
+        jButton19.setText("2");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
-        jButton20.setText("4");
+        jButton20.setText("3");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
-        jButton21.setText("5");
+        jButton21.setText("4");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
-        jButton22.setText("6");
+        jButton22.setText("5");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
-        jButton23.setText("7");
+        jButton23.setText("6");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton24.setText("-");
-        jButton24.setPreferredSize(new java.awt.Dimension(37, 23));
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setText("+");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         jButton27.setText("Terminar");
 
@@ -287,14 +411,14 @@ public class NewJFrame extends javax.swing.JFrame {
            
        }
        else{
-           v=v+1;
+        km = 1;
+        pintarResultado2();
        }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
-        
+    
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -311,6 +435,257 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextField1.setText("Modo libre");
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+        else{
+        if (gr <= 5.9)
+        {
+            gr = (Math.round(gr * 100.0) / 100.0) + 0.2;
+            pintarResultado();
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jButton25ActionPerformed
+    }
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+     
+        if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+        }
+        else{
+            if(gr >= 0.1)
+        {
+            gr = (Math.round(gr * 100.0) / 100.0) - 0.2;
+            pintarResultado();
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_jButton24ActionPerformed
+    }
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        
+       if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{ 
+       gr = 0;
+        pintarResultado();    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+    }
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        
+         if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{
+        gr = 1;
+        pintarResultado();   // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+    }
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+       
+         if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{
+        gr = 2;
+       pintarResultado(); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+    }
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{
+        gr = 3;
+        pintarResultado();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
+    }
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+       if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{
+        gr = 4;
+       pintarResultado(); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton21ActionPerformed
+    }
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{
+        gr = 5;
+        pintarResultado();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton22ActionPerformed
+    }
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+       if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }else{
+        gr = 6;
+        pintarResultado();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
+    }
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        if (km <= 5.9){
+            km = (Math.round(km * 100.0) / 100.0) + 0.1;
+            pintarResultado2();
+        }
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+
+        if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+        }
+        else{
+        if (km >= 0.1)
+        {
+            km = (Math.round(km * 100.0) / 100.0) - 0.1;
+            pintarResultado2();
+        }
+                }// TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 2;
+        pintarResultado2();
+       }
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 3;
+        pintarResultado2();
+       }
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 4;
+        pintarResultado2();
+       }
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 5;
+        pintarResultado2();
+       }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 6;
+        pintarResultado2();
+       }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 7;
+        pintarResultado2();
+       }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 8;
+        pintarResultado2();
+       }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+       if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 9;
+        pintarResultado2();
+       }
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 10;
+        pintarResultado2();
+       }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+     if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 11;
+        pintarResultado2();
+       }
+           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+      if(modo.equals("Predeterminado")){
+           String nombre="modo 1";
+           
+       }
+       else{
+        km = 12;
+        pintarResultado2();
+       }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
