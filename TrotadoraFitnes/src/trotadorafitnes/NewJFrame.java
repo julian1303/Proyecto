@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 public class NewJFrame extends javax.swing.JFrame {
 
-    Sesion sesion;
     String modo;
     modoDeEntrenamiento m;
     int v=0;
@@ -391,17 +390,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                
         
-        sesion = new Sesion();
-        
-        String estado="on";
-        Sesion.OnOff(estado); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        
-        String estado="off";
-        sesion.OnOff(estado); 
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -534,10 +527,10 @@ public class NewJFrame extends javax.swing.JFrame {
            
        }
        else{
-        if (km <= 5.9){
-            km = (Math.round(km * 100.0) / 100.0) + 0.1;
-            pintarResultado2();
-        }
+            if (km <= 5.9){
+                km = (Math.round(km * 100.0) / 100.0) + 0.1;
+                pintarResultado2();
+               }
         } // TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
 
