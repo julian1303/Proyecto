@@ -17,6 +17,37 @@ public class Usuario {
     int peso;
     int edad;
 
+    public void usuarioM(){
+        this.sexo="masculino";
+        this.peso=75;
+        this.edad=20;
+    }
+    public void usuarioF(){
+        this.sexo="femenino";
+        this.peso=60;
+        this.edad=20;
+    }
+
+    public int getIdUsuaurio() {
+        return IdUsuaurio;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+    
     public void setIdUsuaurio(int IdUsuaurio) {
         this.IdUsuaurio = IdUsuaurio;
     }

@@ -13,6 +13,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     String modo;
     modoDeEntrenamiento m;
+    int velInicial;
+    int incliacionInicial;
+    int nv=0;
     int v=0;
     public double gr;
     public double km;
@@ -21,6 +24,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private int hora = 0;
     private boolean continuar = true;
     private Entrenamiento i;
+    Usuario user;
+    Motor motor;
+    String EstadoDelMotor;
+    CalculoDeEstadisticas estad;
     
     
     public NewJFrame() {
@@ -32,6 +39,11 @@ public class NewJFrame extends javax.swing.JFrame {
         btn_parar.setEnabled(false);
         btn_reanudar.setEnabled(false);
         modo="Modo libre";
+        velInicial=1;
+        incliacionInicial=0;
+        motor=new Motor();
+        motor.Motor();
+        EstadoDelMotor=motor.getEstado();
         
     }
     public void imprimirInclinacion(){
@@ -46,6 +58,20 @@ public class NewJFrame extends javax.swing.JFrame {
         DecimalFormat df=new DecimalFormat();        
         jLabel2.setText("<html><body>Tiempo<br>" + df.format(hora)+":"+df.format(minutos)+":"+df.format(segundos) + "</body></html>");
     } 
+    public void imprimirCalorias(double caloriasTotales) {
+         DecimalFormat df=new DecimalFormat(); 
+        jLabel7.setText("<html><body>Calorias quemadas:" + df.format(caloriasTotales) + "</body></html>");
+    }
+    public void imprimirDistacia(double d){
+         DecimalFormat df=new DecimalFormat("0.0"); 
+        
+            nv=(int) (d/400);
+        
+        jLabel8.setText("<html><body>Distancia:" + df.format(d) + " mts <br>"
+                + "Numero de vueltas: "+df.format(nv)+"</body></html>");
+        
+        
+    }
     public synchronized int aumentSeg(){
         seg++;        
         return seg;
@@ -128,6 +154,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -334,6 +362,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
 
+        jLabel7.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("PMingLiU-ExtB", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -374,8 +406,13 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton23)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(189, 189, 189))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton5)
                                         .addGap(3, 3, 3)
@@ -384,7 +421,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addComponent(jButton13)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton14)
-                                        .addGap(21, 21, 21)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,15 +435,12 @@ public class NewJFrame extends javax.swing.JFrame {
                                         .addComponent(jButton10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(5, 5, 5)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(189, 189, 189))))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                                        .addGap(31, 31, 31))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
@@ -418,7 +452,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -430,7 +468,12 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -478,68 +521,110 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_comenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comenzarActionPerformed
+
         
-        btn_comenzar.setEnabled(false);
-        btn_parar.setEnabled(true);
-        btn_reanudar.setEnabled(false);
-        resetSeg();
-        resetMin();
-        resetHora();
-        seguir();
-        i=null;
-        i = new Entrenamiento(this);
-        i.start();
+        user=new Usuario();
+        estad=new CalculoDeEstadisticas();
+        jLabel6.setText("<html><body>Por favor digite 1 o 2 segun la opcion"
+                + "<br>1.Hombre"
+                + "<br>2.Mujer");
+        if(EstadoDelMotor.equals("encendido")){
+            btn_comenzar.setEnabled(false);
+            btn_parar.setEnabled(true);
+            btn_reanudar.setEnabled(false);
+            resetSeg();
+            resetMin();
+            resetHora();
+            seguir();
+            i=null;
+            i = new Entrenamiento(this);
+            i.start(); 
+        }
         
     }//GEN-LAST:event_btn_comenzarActionPerformed
     
     private void btn_pararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pararActionPerformed
-        
+
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
        btn_comenzar.setEnabled(true);
         btn_parar.setEnabled(false);
         btn_reanudar.setEnabled(true);
         parar();
-        
+        }
     }//GEN-LAST:event_btn_pararActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      
-       if(modo.equals("Predeterminado")){
-           String nombre="modo1";
-            m.Modo(nombre);     
-            this.km=m.getVel();
-            imprimirVelocidad();
-            this.gr=m.getIncl();
-            imprimirInclinacion();
-            jLabel6.setText("<html><body>El modo de entrenamiento elegido es "+ m.getNombre()+ "<br>"
-                    + "la velocidad es: "+ m.getVel()+"<br>"
-                    + "la incinacion es: "+ m.getIncl()+""
-                    + "</body></html>");
-           
-           
-       }
-       else{
-        km = 1;
-        imprimirVelocidad();
-       }
+    if(user==null){
         
+     }
+    else{
+        if(EstadoDelMotor.equals("apagado")){
+            user.usuarioM();
+            motor.setEstado("encendido");
+            this.EstadoDelMotor=motor.getEstado();
+            jLabel6.setText("");
+            km=velInicial;
+            gr=incliacionInicial;
+            btn_comenzar.setEnabled(false);
+                btn_parar.setEnabled(true);
+                btn_reanudar.setEnabled(false);
+                resetSeg();
+                resetMin();
+                resetHora();
+                seguir();
+                i=null;
+                i = new Entrenamiento(this);
+                i.start(); 
+        }
+        else{
+           if(modo.equals("Predeterminado")){
+               String nombre="modo1";
+                m.Modo(nombre);     
+                this.km=m.getVel();
+                imprimirVelocidad();
+                this.gr=m.getIncl();
+                imprimirInclinacion();
+                jLabel6.setText("<html><body>El modo de entrenamiento elegido es "+ m.getNombre()+ "<br>"
+                        + "la velocidad es: "+ m.getVel()+"<br>"
+                        + "la incinacion es: "+ m.getIncl()+""
+                        + "</body></html>");
+
+
+           }
+           else{
+            km = 1;
+            imprimirVelocidad();
+           }
+        } 
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
-        
-        m=new modoDeEntrenamiento();
-        
-        if(jToggleButton1.isSelected()){
-        this.modo="Predeterminado";
-        jLabel6.setText("Modo predeterminado");
+        if(EstadoDelMotor.equals("apagado")){
+          
         }
-        else{
-        this.modo="Modo libre";
-        jLabel6.setText("Modo libre");
+        else{        
+            m=new modoDeEntrenamiento();
+
+            if(jToggleButton1.isSelected()){
+            this.modo="Predeterminado";
+            jLabel6.setText("Modo predeterminado");
+            }
+            else{
+            this.modo="Modo libre";
+            jLabel6.setText("Modo libre");
+            }
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{
         if(modo.equals("Predeterminado")){
            String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
@@ -551,10 +636,14 @@ public class NewJFrame extends javax.swing.JFrame {
             gr = (Math.round(gr * 100.0) / 100.0) + 0.2;
             imprimirInclinacion();
         } // TODO add your handling code here:
+        }
     }//GEN-LAST:event_jButton25ActionPerformed
     }
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-     
+     if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
         if(modo.equals("Predeterminado")){
             String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
@@ -566,33 +655,47 @@ public class NewJFrame extends javax.swing.JFrame {
             gr = (Math.round(gr * 100.0) / 100.0) - 0.2;
             imprimirInclinacion();
         }   // TODO add your handling code here:
+        }
     }//GEN-LAST:event_jButton24ActionPerformed
     }
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        
-       if(modo.equals("Predeterminado")){
-           String text="Por favor escoja un modo de entrenamiento \n"
-                   + "  con los botones de velocidad";
-           jLabel6.setText(text);
-           
-       }else{ 
-       gr = 0;
-        imprimirInclinacion();    // TODO add your handling code here:
+
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
+            if(modo.equals("Predeterminado")){
+                String text="Por favor escoja un modo de entrenamiento \n"
+                        + "  con los botones de velocidad";
+                jLabel6.setText(text);
+
+            }else{ 
+            gr = 0;
+             imprimirInclinacion();    // TODO add your handling code here:
+            }
     }//GEN-LAST:event_jButton17ActionPerformed
     }
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        
+        if(EstadoDelMotor.equals("apagado")){
+         
+        }
+        else{
          if(modo.equals("Predeterminado")){
            String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
            jLabel6.setText(text);
        }else{
         gr = 1;
-        imprimirInclinacion();   // TODO add your handling code here:
+        imprimirInclinacion();  
+         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton18ActionPerformed
     }
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
        
+        if(EstadoDelMotor.equals("apagado")){
+         
+        }
+        else{
          if(modo.equals("Predeterminado")){
            String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
@@ -601,9 +704,14 @@ public class NewJFrame extends javax.swing.JFrame {
        }else{
         gr = 2;
        imprimirInclinacion(); // TODO add your handling code here:
+         }
     }//GEN-LAST:event_jButton19ActionPerformed
     }
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        if(EstadoDelMotor.equals("apagado")){
+         
+        }
+        else{
         if(modo.equals("Predeterminado")){
             String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
@@ -611,32 +719,53 @@ public class NewJFrame extends javax.swing.JFrame {
            
        }else{
         gr = 3;
-        imprimirInclinacion();// TODO add your handling code here:
+        imprimirInclinacion();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton20ActionPerformed
     }
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-       if(modo.equals("Predeterminado")){
-            String text="Por favor escoja un modo de entrenamiento \n"
-                   + "  con los botones de velocidad";
-           jLabel6.setText(text);
+        if(EstadoDelMotor.equals("apagado")){
            
-       }else{
-        gr = 4;
-       imprimirInclinacion(); // TODO add your handling code here:
+        }
+        else{
+            if(EstadoDelMotor.equals("apagado")){
+               jLabel6.setText("Seleccione una opcion valida");
+            }
+            else{
+            if(modo.equals("Predeterminado")){
+                String text="Por favor escoja un modo de entrenamiento \n"
+                       + "  con los botones de velocidad";
+               jLabel6.setText(text);
+
+           }else{
+            gr = 4;
+           imprimirInclinacion(); // TODO add your handling code here:
+            }
+            }
     }//GEN-LAST:event_jButton21ActionPerformed
     }
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        if(modo.equals("Predeterminado")){
+
+        if(EstadoDelMotor.equals("apagado")){
+         
+        }
+        else{
+            if(modo.equals("Predeterminado")){
             String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
            jLabel6.setText(text);
        }else{
         gr = 5;
-        imprimirInclinacion();// TODO add your handling code here:
+        imprimirInclinacion();
+            }// TODO add your handling code here:
     }//GEN-LAST:event_jButton22ActionPerformed
     }
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-       if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{
+        if(modo.equals("Predeterminado")){
             String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
            jLabel6.setText(text);
@@ -644,9 +773,15 @@ public class NewJFrame extends javax.swing.JFrame {
        }else{
         gr = 6;
         imprimirInclinacion();// TODO add your handling code here:
+        }
+        
     }//GEN-LAST:event_jButton23ActionPerformed
     }
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
         if(modo.equals("Predeterminado")){
            String text="Por favor escoja un modo de entrenamiento \n"
                    + "  con los botones de velocidad";
@@ -658,48 +793,80 @@ public class NewJFrame extends javax.swing.JFrame {
                 km = (Math.round(km * 100.0) / 100.0) + 0.1;
                 imprimirVelocidad();
                }
-        } // TODO add your handling code here:
+        }
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-
-        if(modo.equals("Predeterminado")){
-            String text="Por favor escoja un modo de entrenamiento \n"
-                   + "  con los botones de velocidad";
-           jLabel6.setText(text);
+        if(EstadoDelMotor.equals("apagado")){
+          
         }
         else{
-        if (km >= 0.1)
-        {
-            km = (Math.round(km * 100.0) / 100.0) - 0.1;
-            imprimirVelocidad();
-        }
-                }// TODO add your handling code here:
+            if(modo.equals("Predeterminado")){
+                String text="Por favor escoja un modo de entrenamiento \n"
+                       + "  con los botones de velocidad";
+               jLabel6.setText(text);
+            }
+            else{
+                if (km >= 0.1){
+                    km = (Math.round(km * 100.0) / 100.0) - 0.1;
+                    imprimirVelocidad();
+                }
+            }
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       if(modo.equals("Predeterminado")){
-          String nombre="modo2";
-            m.Modo(nombre);     
-            this.km=m.getVel();
+
+        if(user==null){
+        
+     }
+    else{
+        if(EstadoDelMotor.equals("apagado")){
+            user.usuarioF();
+            motor.setEstado("encendido");  
+            this.EstadoDelMotor=motor.getEstado();
+            jLabel6.setText("");
+            km=velInicial;
+            gr=incliacionInicial;
+            btn_comenzar.setEnabled(false);
+            btn_parar.setEnabled(true);
+            btn_reanudar.setEnabled(false);
+            resetSeg();
+            resetMin();
+            resetHora();
+            seguir();
+            i=null;
+            i = new Entrenamiento(this);
+            i.start(); 
+        }
+        else{
+            if(modo.equals("Predeterminado")){
+              String nombre="modo2";
+                m.Modo(nombre);     
+                this.km=m.getVel();
+                imprimirVelocidad();
+                this.gr=m.getIncl();
+                imprimirInclinacion();
+                jLabel6.setText("<html><body>El modo de entrenamiento elegido es "+ m.getNombre()+ "<br>"
+                        + "la velocidad es: "+ m.getVel()+"<br>"
+                        + "la incinacion es: "+ m.getIncl()+""
+                        + "</body></html>");
+            }
+           else{
+            km = 2;
             imprimirVelocidad();
-            this.gr=m.getIncl();
-            imprimirInclinacion();
-            jLabel6.setText("<html><body>El modo de entrenamiento elegido es "+ m.getNombre()+ "<br>"
-                    + "la velocidad es: "+ m.getVel()+"<br>"
-                    + "la incinacion es: "+ m.getIncl()+""
-                    + "</body></html>");
-           
+           }
        }
-       else{
-        km = 2;
-        imprimirVelocidad();
-       }
-         // TODO add your handling code here:
+        } // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
+        if(modo.equals("Predeterminado")){
            String nombre="modo3";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -716,11 +883,16 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 3;
         imprimirVelocidad();
        }
+       }
          // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{        
+        if(modo.equals("Predeterminado")){
            String nombre="modo4";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -736,11 +908,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 4;
         imprimirVelocidad();
        }
-         // TODO add your handling code here:
+        }  // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{        
+        if(modo.equals("Predeterminado")){
            String nombre="modo5";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -756,11 +932,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 5;
         imprimirVelocidad();
        }
-          // TODO add your handling code here:
+       }   // TODO add your handling code here:
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{        
+        if(modo.equals("Predeterminado")){
           String nombre="modo6";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -777,11 +957,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 6;
         imprimirVelocidad();
        }
-          // TODO add your handling code here:
+        }   // TODO add your handling code here:
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
+        if(modo.equals("Predeterminado")){
            String nombre="modo7";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -798,11 +982,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 7;
         imprimirVelocidad();
        }
-          // TODO add your handling code here:
+        }   // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{
+        if(modo.equals("Predeterminado")){
           String nombre="modo8";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -818,11 +1006,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 8;
         imprimirVelocidad();
        }
-          // TODO add your handling code here:
+        }    // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-       if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{
+        if(modo.equals("Predeterminado")){
            String nombre="modo9";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -838,11 +1030,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 9;
         imprimirVelocidad();
        }
-         // TODO add your handling code here:
+        }  // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{
+        if(modo.equals("Predeterminado")){
             String nombre="modo10";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -858,11 +1054,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 10;
         imprimirVelocidad();
        }
-          // TODO add your handling code here:
+        }  // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-     if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+          
+        }
+        else{
+        if(modo.equals("Predeterminado")){
            String nombre="modo11";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -878,11 +1078,15 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 11;
         imprimirVelocidad();
        }
-           // TODO add your handling code here:
+        }    // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-      if(modo.equals("Predeterminado")){
+        if(EstadoDelMotor.equals("apagado")){
+           
+        }
+        else{
+        if(modo.equals("Predeterminado")){
             String nombre="modo12";
             m.Modo(nombre);     
             this.km=m.getVel();
@@ -898,15 +1102,20 @@ public class NewJFrame extends javax.swing.JFrame {
         km = 12;
         imprimirVelocidad();
        }
-          // TODO add your handling code here:
+        }   // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void btn_reanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reanudarActionPerformed
-       btn_comenzar.setEnabled(false);
+        if(EstadoDelMotor.equals("apagado")){
+         
+        }
+        else{
+        btn_comenzar.setEnabled(false);
         btn_parar.setEnabled(true);
         btn_reanudar.setEnabled(false);
         seguir();
         i.seguir();
+        }
     }//GEN-LAST:event_btn_reanudarActionPerformed
 
     /**
@@ -977,6 +1186,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+    
 }
