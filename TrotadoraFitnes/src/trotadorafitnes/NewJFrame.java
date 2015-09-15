@@ -13,6 +13,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     String modo;
     modoDeEntrenamiento m;
+    boolean fueEncendida=false;
     int velInicial;
     int incliacionInicial;
     int nv=0;
@@ -45,6 +46,14 @@ public class NewJFrame extends javax.swing.JFrame {
         motor.Motor();
         EstadoDelMotor=motor.getEstado();
         
+    }
+   
+    
+    public void imprimirEstadisticas(double calorias,double distanciaRecorrida){
+        DecimalFormat df = new DecimalFormat("0.0");        
+        jLabel6.setText("<html><body>Calorias totales quemadas: "+df.format(calorias) + "<br>"
+                      + "Distancia total recorrida: "+df.format(distanciaRecorrida)+"<br>"
+                      + "Numero de vueltas totales: " + df.format(nv) + "</body></html>");
     }
     public void imprimirInclinacion(){
         DecimalFormat df = new DecimalFormat("0.0");        
@@ -522,24 +531,39 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btn_comenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_comenzarActionPerformed
 
-        
-        user=new Usuario();
-        estad=new CalculoDeEstadisticas();
-        jLabel6.setText("<html><body>Por favor digite 1 o 2 segun la opcion"
+        if(EstadoDelMotor.equals("apagado")){
+                user=new Usuario();
+                estad=new CalculoDeEstadisticas();
+                jLabel6.setText("<html><body>Por favor digite 1 o 2 segun la opcion"
                 + "<br>1.Hombre"
-                + "<br>2.Mujer");
-        if(EstadoDelMotor.equals("encendido")){
-            btn_comenzar.setEnabled(false);
-            btn_parar.setEnabled(true);
-            btn_reanudar.setEnabled(false);
-            resetSeg();
-            resetMin();
-            resetHora();
-            seguir();
-            i=null;
-            i = new Entrenamiento(this);
-            i.start(); 
+                + "<br>2.Mujer");  
         }
+        else{
+            if(fueEncendida==true){
+                btn_comenzar.setEnabled(false);
+                btn_parar.setEnabled(true);
+                btn_reanudar.setEnabled(false);
+                seguir();
+                i.seguir();
+            }
+            else{
+                btn_comenzar.setEnabled(false);
+                btn_parar.setEnabled(true);
+                btn_reanudar.setEnabled(false);
+                resetSeg();
+                resetMin();
+                resetHora();
+                seguir();
+                i=null;
+                i = new Entrenamiento(this);
+                fueEncendida=true;
+                i.start(); 
+            }
+            
+            
+            
+        }
+        
         
     }//GEN-LAST:event_btn_comenzarActionPerformed
     
@@ -549,7 +573,7 @@ public class NewJFrame extends javax.swing.JFrame {
           
         }
         else{
-       btn_comenzar.setEnabled(true);
+        btn_comenzar.setEnabled(true);
         btn_parar.setEnabled(false);
         btn_reanudar.setEnabled(true);
         parar();
@@ -569,15 +593,16 @@ public class NewJFrame extends javax.swing.JFrame {
             km=velInicial;
             gr=incliacionInicial;
             btn_comenzar.setEnabled(false);
-                btn_parar.setEnabled(true);
-                btn_reanudar.setEnabled(false);
-                resetSeg();
-                resetMin();
-                resetHora();
-                seguir();
-                i=null;
-                i = new Entrenamiento(this);
-                i.start(); 
+            btn_parar.setEnabled(true);
+            btn_reanudar.setEnabled(false);
+            resetSeg();
+            resetMin();
+            resetHora();
+            seguir();
+            i=null;
+            i = new Entrenamiento(this);
+            fueEncendida=true;
+            i.start(); 
         }
         else{
            if(modo.equals("Predeterminado")){
@@ -789,7 +814,7 @@ public class NewJFrame extends javax.swing.JFrame {
            
        }
        else{
-            if (km <= 5.9){
+            if (km <= 11.9){
                 km = (Math.round(km * 100.0) / 100.0) + 0.1;
                 imprimirVelocidad();
                }
@@ -838,6 +863,7 @@ public class NewJFrame extends javax.swing.JFrame {
             seguir();
             i=null;
             i = new Entrenamiento(this);
+            fueEncendida=true;
             i.start(); 
         }
         else{
@@ -1110,11 +1136,25 @@ public class NewJFrame extends javax.swing.JFrame {
          
         }
         else{
-        btn_comenzar.setEnabled(false);
-        btn_parar.setEnabled(true);
+        btn_comenzar.setEnabled(true);
+        btn_parar.setEnabled(false);
         btn_reanudar.setEnabled(false);
-        seguir();
-        i.seguir();
+        resetHora();
+        resetMin();
+        resetSeg();        
+        jLabel1.setText("");
+        jLabel2.setText("");
+        jLabel3.setText("");
+        jLabel4.setText("");
+        jLabel5.setText("");
+        jLabel6.setText("");
+        jLabel7.setText("");
+        jLabel8.setText("");
+        imprimirEstadisticas(i.caloriasTotales,i.distanciaRecorridaS);
+        EstadoDelMotor="apagado";
+        user=null;
+        
+        
         }
     }//GEN-LAST:event_btn_reanudarActionPerformed
 
@@ -1190,6 +1230,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+    
 
     
 }
